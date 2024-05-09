@@ -1,23 +1,14 @@
 const EmailVerification = (req, res, next) => {
     try {
-        const body=req.body;
+        const { username } = req.body;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const result= emailRegex.test(body.username);
-        if(result){
+        if (emailRegex.test(username)) {
             next();
+        } else {
+            res.status(404).json({ code: 404, message: "Invalid Email" });
         }
-        else{
-            res.send({
-                code:404,
-                message:"Invalid Email"
-            })
-        }
-    }
-    catch (err) {
-        res.send({
-            code:404,
-            message:"Invalid Email"
-        })
+    } catch (err) {
+        res.status(404).json({ code: 404, message: "Invalid Email" });
     }
 }
 

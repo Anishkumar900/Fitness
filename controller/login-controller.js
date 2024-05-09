@@ -14,23 +14,35 @@ const LoginVarication = async (req, res) => {
                         if(token){
                             res.json({
                                 token,
+                                code:200,
                                 message:"login successfull"
                             })
                         }
+                        
                 })
-                // res.send("sahi hai");
 
             } else {
-                res.send("galat password hai");
+                res.send({
+                    code:400,
+                    message:"Invilide user"
+                })
             }
         } else {
-            res.send("email nahi mila");
+            res.send({
+                code:400,
+                message:"Invilide user"
+            })
         }
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Server Error");
+        res.send({
+            code:400,
+            message:"Invilide user"
+        })
     }
 };
+
+
+
 
 const verificationProfile=(req,res)=>{
     // console.log(req.token);

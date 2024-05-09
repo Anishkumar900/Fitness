@@ -1,20 +1,11 @@
-const {RegistationData}=require("../models/sinup-models");
+const { RegistationData } = require("../models/sinup-models");
 
-
-const passwordupdate=async(req,res)=>{
-
-    // console.log(req.body.Form);
-    // res.send({
-    //     code:200,
-    //     message:"hello"
-    // })
-
-
+const passwordupdate = async (req, res) => {
     try {
         const userData = await RegistationData.findOne({ username: req.body.Form.username });
 
-        if(!userData){
-            res.json({
+        if (!userData) {
+            return res.status(400).json({
                 code: 400,
                 error: "Internal Server Error"
             });
@@ -22,19 +13,18 @@ const passwordupdate=async(req,res)=>{
         userData.password = req.body.Form.password;
         userData.repassword = req.body.Form.repassword;
 
-    
         await userData.save();
-        res.json({
+        return res.status(200).json({
             code: 200,
             message: "Password updated successfully"
         });
     } catch (error) {
         console.error(error);
-        res.json({
+        return res.status(500).json({
             code: 500,
             error: "Internal Server Error"
         });
     }
+};
 
-}
-module.exports={passwordupdate}
+module.exports = { passwordupdate };
