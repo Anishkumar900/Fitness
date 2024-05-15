@@ -11,7 +11,8 @@ const { ForgotPasswordUsernameVerifaction } = require("../controller/forgotusern
 const { validpassword } = require("../middlewear/resetPasswordConformation");
 const { passwordupdate } = require("../controller/passwordupdate");
 
-const {validate,payment,paymentdetails}=require("../controller/payment")
+const {validatePayment,payment,paymentdetails,emailVerificationForPayment}=require("../controller/payment")
+const {EmailacknowlogeForPayment}=require("../controller-payment-mail/payment-mail");
 
 
 route.post("/sinup", EmailVerification, emailsinupresister);
@@ -22,7 +23,9 @@ route.post("/profile", verifyToken, verificationProfile);
 route.post("/forgotpasswordUserverifaction", ForgotPasswordUsernameVerifaction);
 route.post("/resetpassword", validpassword, passwordupdate);
 route.post("/api/payment",payment)
-route.post("/api/payment/validate",validate)
+route.post("/api/payment/validate",validatePayment)
 route.post("/api/payment/validate/storedata",paymentdetails)
+route.post("/api/joinclasses/emailverifaction",emailVerificationForPayment);
+route.post("/api/payment/validate/acknowloge/mail",EmailacknowlogeForPayment)
 
 module.exports = { route };

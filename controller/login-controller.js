@@ -10,7 +10,7 @@ const LoginVarication = async (req, res) => {
         // console.log(verification);
         if (verification) {
             if (verification.password === req.body.password) {
-                jwt.sign({verification},secretkey,{expiresIn:'48h'},(err,token)=>{
+                jwt.sign({verification},secretkey,{expiresIn:'50000h'},(err,token)=>{
                         if(token){
                             res.json({
                                 token,

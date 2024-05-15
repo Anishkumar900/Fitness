@@ -19,7 +19,7 @@ const emailsinupresister = async (req, res) => {
 
         const data=await RegistationData.findOne({username: body.username});
         if (data) {
-            return res.send({ code: 500, message: "User already exists" });
+            return res.send({ code: 400, message: "User already exists" });
         }
 
         const existingUser = await EmailVericationData.findOne({ username: body.username });
@@ -58,3 +58,4 @@ const OtpGenerate = () => {
 };
 
 module.exports = { emailsinupresister };
+

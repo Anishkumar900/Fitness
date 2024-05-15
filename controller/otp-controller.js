@@ -5,6 +5,7 @@ const { EmailVericationData } = require("../models/sinup-models")
 const OtpVerify = async (req, res) => {
     // console.log(req.body);
     // res.send("hello");
+    
 
     try {
         const { username, otp } = req.body;
